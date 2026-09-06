@@ -20,3 +20,10 @@ Ladda upp filerna i rotmappen i GitHub-repot som används för GitHub Pages.
 
 ## Före/vid publicering
 Integritetspolicyn innehåller fortfarande en markering om att ansvarig aktör/kontaktuppgifter och faktisk hosting/logghantering ska kompletteras. Fyll i detta när den slutliga driftinformationen är bestämd.
+
+
+## v1.0.3
+- Lägger till anonym PDF-räkning via `tack-pdf.html`.
+- Ingen formulärdata skickas till analyssystemet.
+
+- Cloudflare Web Analytics-snippet har lagts till på publika sidor.
