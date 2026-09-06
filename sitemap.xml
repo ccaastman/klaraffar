@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://klaraffar.se/</loc></url>
-  <url><loc>https://klaraffar.se/kopeavtal-bil.html</loc></url>
-  <url><loc>https://klaraffar.se/kopeavtal-privatperson.html</loc></url>
-  <url><loc>https://klaraffar.se/kvitto-privatperson.html</loc></url>
-  <url><loc>https://klaraffar.se/integritet.html</loc></url>
-  <url><loc>https://klaraffar.se/villkor.html</loc></url>
+  <url><loc>https://klaraffar.se/</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-bil.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-privatperson.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kvitto-privatperson.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-moped.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-mc.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-bat.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-cykel.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-elcykel.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-mobil.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kopeavtal-dator.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kvitto-bil-privat.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/kvitto-begagnad-vara.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/vad-ska-kopeavtal-innehalla.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/integritet.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://klaraffar.se/villkor.html</loc><lastmod>2026-09-06</lastmod></url>
 </urlset>

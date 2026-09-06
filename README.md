@@ -1,4 +1,4 @@
-# KlarAffär v1.0
+# KlarAffär v1.1.0
 
 Första publika privacy-first-versionen för https://klaraffar.se/
 
@@ -22,8 +22,10 @@ Ladda upp filerna i rotmappen i GitHub-repot som används för GitHub Pages.
 Integritetspolicyn innehåller fortfarande en markering om att ansvarig aktör/kontaktuppgifter och faktisk hosting/logghantering ska kompletteras. Fyll i detta när den slutliga driftinformationen är bestämd.
 
 
-## v1.0.3
+## v1.1.0
 - Lägger till anonym PDF-räkning via `tack-pdf.html`.
 - Ingen formulärdata skickas till analyssystemet.
 
 - Cloudflare Web Analytics-snippet har lagts till på publika sidor.
+
+SEO v1.1.0: 10 nya söklandningssidor, förbättrade befintliga landningssidor, internlänkar, titlar/metabeskrivningar och uppdaterad sitemap.

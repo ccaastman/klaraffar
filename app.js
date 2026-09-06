@@ -962,3 +962,12 @@ document.querySelectorAll("[data-start-doc]").forEach(btn => {
     if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 });
+
+// SEO landing pages can preselect document type without sending any form data.
+try {
+  const seoParams = new URLSearchParams(window.location.search);
+  const requestedDoc = seoParams.get("doc");
+  if (requestedDoc === "receipt" || requestedDoc === "agreement") {
+    setDocumentType(requestedDoc);
+  }
+} catch (_) {}
