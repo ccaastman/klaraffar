@@ -659,6 +659,12 @@ function downloadPdf() {
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    // Anonym mätning av lyckad PDF-generering via en intern tack-sida.
+    // Ingen formulärdata skickas med i URL:en eller till analysverktyget.
+    setTimeout(() => {
+      window.location.href = "tack-pdf.html";
+    }, 350);
   } catch (err) {
     logRuntimeError("KA-PDF-001", err);
     alert("PDF kunde inte skapas. Felkod: KA-PDF-001");
