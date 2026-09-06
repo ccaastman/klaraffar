@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KlarAffär v1.0 RC.1</title>
+  <meta name="description" content="Skapa gratis köpeavtal eller kvitto mellan privatpersoner. Anpassat för bil, mobil, cykel, båt och andra privata affärer. PDF skapas direkt i webbläsaren.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="KlarAffär – gratis köpeavtal och kvitto">
+  <meta property="og:description" content="Skapa ett tydligt köpeavtal eller kvitto för en privat affär på några minuter.">
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f6f8;color:#18202a}.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:white;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:10}.brand{font-weight:800;font-size:1.2rem}.link-btn{border:0;background:transparent;padding:8px 10px;cursor:pointer;font:inherit}.wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px}.hero{padding:18px 4px 8px}.hero h1{font-size:clamp(2rem,5vw,4rem);margin:.2rem 0}.hero p{max-width:650px;color:#58606b}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:700}.card{background:white;border:1px solid #e3e7ec;border-radius:18px;padding:20px;margin-top:18px;box-shadow:0 8px 30px rgba(20,30,50,.04)}.grid.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}label{display:block;font-weight:650;font-size:.94rem;margin-top:12px}input,select,textarea{width:100%;margin-top:7px;padding:12px 13px;border:1px solid #ccd3db;border-radius:10px;font:inherit;background:white}textarea{resize:vertical}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}button.primary,button.secondary{border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer}.primary{border:1px solid #18202a;background:#18202a;color:#fff}.secondary{border:1px solid #ccd3db;background:#fff;color:#18202a}.preview{padding:16px;border:1px dashed #cfd6df;border-radius:12px;line-height:1.5}.preview.empty{color:#7a838e}.preview h3{margin-top:0}.row{display:flex;gap:12px;justify-content:space-between;border-bottom:1px solid #eef1f4;padding:8px 0}.row span:first-child{font-weight:700}.hidden{display:none}.error-item{border:1px solid #e1e5ea;border-radius:12px;padding:14px;margin:10px 0}.error-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:800}.muted{color:#6c7580}.log-item{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9rem;padding:8px 0;border-bottom:1px solid #eef1f4}footer{text-align:center;padding:24px;color:#7a838e;font-size:.9rem}@media(max-width:700px){.grid.two{grid-template-columns:1fr}.topbar{padding:14px}.wrap{padding:18px 12px 40px}}@media print{.topbar,.hero,.actions,footer,#adminView,.card:first-of-type{display:none!important}body{background:white}.wrap{max-width:none;padding:0}.card{border:0;box-shadow:none}.preview{border:0;padding:0}}
+
+.document-choice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px}
+.doc-option{display:flex;flex-direction:column;gap:7px;text-align:left;padding:16px;border:1px solid #d8dee6;background:#fff;border-radius:14px;cursor:pointer;font:inherit;min-height:118px}
+.doc-option strong{font-size:1rem}
+.doc-option span{color:#66707c;line-height:1.4}
+.doc-option.active{border-color:#18202a;box-shadow:0 0 0 2px #18202a inset}
+.choice-help{margin:14px 0 0}
+.checkbox-label{display:flex;align-items:center;gap:10px;margin-top:38px}
+.checkbox-label input{width:auto;margin:0}
+@media(max-width:700px){.document-choice{grid-template-columns:1fr}.checkbox-label{margin-top:12px}}
+
+.hidden-field{display:none!important}
+
+.dynamic-details{margin-top:22px;padding-top:18px;border-top:1px solid #edf0f3}
+.dynamic-details h3{margin:0 0 4px}
+.dynamic-details .muted{margin:0 0 8px}
+.dynamic-details .field-note{font-size:.82rem;color:#747d88;margin-top:4px}
+
+.case-toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.case-card{border:1px solid #e0e5ea;border-radius:14px;padding:15px;margin:10px 0;cursor:pointer}
+.case-card:hover{border-color:#aeb8c4}
+.case-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.case-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:800}
+.status-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef1f4;font-size:.82rem;font-weight:700}
+.case-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;margin-top:10px;color:#5f6974}
+.case-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.role-box{border:1px dashed #cbd3dc;border-radius:12px;padding:13px;margin-top:12px}
+@media(max-width:700px){.case-toolbar,.case-meta{grid-template-columns:1fr}}
+
+.signature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:34px}
+.signature-line{border-top:1px solid #323a44;padding-top:7px;margin-top:34px;font-size:.9rem}
+.document-title{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:16px}
+.document-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;color:#68727d}
+.document-note{padding:12px 14px;background:#f7f8fa;border-radius:10px;margin-top:16px}
+.footer-link{border:0;background:transparent;text-decoration:underline;color:inherit;cursor:pointer;font:inherit;padding:0}
+@media(max-width:700px){.signature-grid{grid-template-columns:1fr}}
+
+  
+.privacy-note{margin:18px 0 12px;padding:12px 14px;border:1px solid #e1e5e9;border-radius:12px;background:#f8f9fa;color:#56606b;font-size:.9rem;line-height:1.45}
+
+  
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.hero-cta{width:auto}
+.hero-trust{font-size:.88rem!important;color:#68727d!important;margin-top:12px!important}
+.seo-wrap{max-width:980px;margin:28px auto;padding:0 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.seo-card{background:#fff;border:1px solid #e3e7eb;border-radius:16px;padding:20px}
+.seo-card h2{font-size:1.08rem;margin:0 0 8px}
+.seo-card p{font-size:.92rem;color:#606a75;line-height:1.55;margin:0}
+.text-cta{border:0;background:transparent;padding:12px 0 0;font:inherit;font-weight:700;cursor:pointer}
+@media(max-width:760px){
+  .hero-actions{display:grid;grid-template-columns:1fr}
+  .hero-cta{width:100%}
+  .seo-wrap{grid-template-columns:1fr}
+}
+
+  
+.nav-anchor{text-decoration:none;display:inline-flex;align-items:center}
+.footer-links{display:flex;justify-content:center;gap:16px;margin-top:10px;flex-wrap:wrap}
+.footer-links a{color:inherit}
+.legal-wrap{max-width:820px;margin:34px auto;padding:0 20px}
+.legal-card{background:#fff;border:1px solid #e3e7eb;border-radius:16px;padding:26px}
+.legal-card h1{margin-top:0}
+.legal-card h2{margin-top:28px;font-size:1.15rem}
+.legal-card p,.legal-card li{line-height:1.65;color:#505a65}
+.legal-note{padding:12px 14px;background:#f8f9fa;border:1px solid #e3e7eb;border-radius:12px}
+
+</style>
+  <link rel="canonical" href="https://klaraffar.se/">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">KlarAffär</div>
+    <nav>
+      <button id="homeBtn" class="link-btn">Skapa underlag</button>
+      <a class="link-btn nav-anchor" href="integritet.html">Integritet</a>
+      <a class="link-btn nav-anchor" href="villkor.html">Villkor</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section id="builderView">
+      <div class="hero">
+        <p class="eyebrow">KlarAffär v1.0 RC</p>
+        <h1>Gör affären klar.</h1>
+        <p>Skapa dokument för en tydligare affär mellan privatpersoner.</p>
+      </div>
+
+      <section class="card">
+        <h2>Vad vill du skapa?</h2>
+        <div class="document-choice">
+          <button class="doc-option active" data-doc="agreement">
+            <strong>Köpeavtal</strong>
+            <span>Dokumentera vad köpare och säljare kommit överens om.</span>
+          </button>
+          <button class="doc-option" data-doc="receipt">
+            <strong>Kvitto</strong>
+            <span>Bekräfta att betalning och överlämning har genomförts.</span>
+          </button>
+        </div>
+        <p id="docTypeHelp" class="muted choice-help">
+          Köpeavtal: används för att dokumentera villkoren för affären.
+        </p>
+      </section>
+
+      <div class="card">
+        <div class="grid two">
+          <label>Vad säljs?
+            <select id="itemType">
+              <option>Mobiltelefon</option>
+              <option>Dator</option>
+              <option>Cykel</option>
+              <option>Elcykel</option>
+              <option>Verktyg / maskin</option>
+              <option>Moped</option>
+              <option>MC</option>
+              <option>Båt</option>
+              <option>Bil</option>
+              <option>Övrigt</option>
+            </select>
+          </label>
+          <label id="customItemTypeWrap" class="hidden-field">Beskriv vad som säljs
+            <input id="customItemType" maxlength="100" placeholder="Exempel: TV, kamera, möbel, gräsklippare..." />
+          </label>
+          <label>Pris (kr)
+            <input id="price" type="number" min="0" placeholder="12000" />
+          </label>
+          <label>Säljare
+            <input id="seller" placeholder="För- och efternamn" />
+          </label>
+          <label>Säljarens e-post
+            <input id="sellerEmail" type="email" placeholder="saljare@exempel.se" />
+          </label>
+          <label>Säljarens telefon
+            <input id="sellerPhone" type="tel" placeholder="070-123 45 67" />
+          </label>
+          <label>Köpare
+            <input id="buyer" placeholder="För- och efternamn" />
+          </label>
+          <label>Köparens e-post
+            <input id="buyerEmail" type="email" placeholder="kopare@exempel.se" />
+          </label>
+          <label>Köparens telefon
+            <input id="buyerPhone" type="tel" placeholder="070-123 45 67" />
+          </label>
+          <label>Identifiering / serienummer
+            <input id="serial" placeholder="IMEI, serienummer, reg.nr..." />
+          </label>
+          <label>Betalsätt
+            <select id="paymentMethod">
+              <option>Swish</option>
+              <option>Banköverföring</option>
+              <option>Kontant</option>
+              <option>Annat</option>
+            </select>
+          </label>
+          <label>Ort
+            <input id="place" placeholder="Exempel: Stockholm" />
+          </label>
+          <label>Datum
+            <input id="documentDate" type="date" />
+          </label>
+          <label id="paymentReceivedWrap" class="checkbox-label hidden-field">
+            <input id="paymentReceived" type="checkbox" />
+            <span>Betalning mottagen</span>
+          </label>
+        </div>
+
+        <section id="productDetailsSection" class="dynamic-details">
+          <h3>Produktuppgifter</h3>
+          <p class="muted" id="productDetailsHelp">Fälten anpassas efter vald varutyp.</p>
+          <div id="productDetails" class="grid two"></div>
+        </section>
+
+        <label>Beskrivning
+          <textarea id="description" rows="3" placeholder="Övrig beskrivning, skick, färg, utrustning..."></textarea>
+        </label>
+
+        <label>Kända fel / anmärkningar
+          <textarea id="knownIssues" rows="3" placeholder="Beskriv sådant köparen informerats om."></textarea>
+        </label>
+
+        <label>Detta ingår
+          <textarea id="included" rows="3" placeholder="Laddare, kvitto, extra nycklar, tillbehör..."></textarea>
+        </label>
+
+        <label>Övriga villkor
+          <textarea id="terms" rows="3" placeholder="Övriga överenskommelser mellan parterna."></textarea>
+        </label>
+
+        <div class="actions">
+          <p class="privacy-note"><strong>Integritet:</strong> Uppgifterna i formuläret används bara i din webbläsare för att skapa dokumentet. KlarAffär v1.0 RC skickar eller sparar inte avtalsuppgifterna på någon server.</p>
+          <button id="previewBtn" class="primary">Förhandsgranska</button>
+          <button id="pdfBtn" class="secondary">Ladda ner PDF</button>
+          <button id="printBtn" class="secondary">Skriv ut</button>
+        </div>
+      </div>
+
+      <section class="card">
+        <h2>Förhandsgranskning</h2>
+        <div id="preview" class="preview empty">Fyll i uppgifterna och klicka på Förhandsgranska.</div>
+      </section>
+    </section>
+
+    <section id="adminView" class="hidden">
+      <div class="hero">
+        <p class="eyebrow">Admin</p>
+        <h1>Felsökningsmotor</h1>
+        <p>Sök på felkod, funktionsnamn eller beskrivning.</p>
+      </div>
+
+      <div class="card">
+        <div class="grid two">
+          <label>Sök
+            <input id="errorSearch" placeholder="Ex: KA-PRV-001 eller preview" />
+          </label>
+          <label>Filtrera område
+            <select id="errorArea">
+              <option value="">Alla</option>
+              <option value="builder">Builder</option>
+              <option value="validation">Validation</option>
+              <option value="preview">Preview</option>
+              <option value="print">Print/PDF</option>
+              <option value="admin">Admin</option>
+            </select>
+          </label>
+        </div>
+        <div class="actions">
+          <button id="searchErrorsBtn" class="primary">Sök fel</button>
+          <button id="showAllErrorsBtn" class="secondary">Visa alla</button>
+        </div>
+      </div>
+
+      <section class="card">
+        <h2>Felregister</h2>
+        <div id="errorResults"></div>
+      </section>
+
+      <section class="card">
+        <h2>Senaste loggade fel</h2>
+        <div id="runtimeLog"></div>
+      </section>
+    </section>
+  </main>
+
+
+  <section class="seo-wrap">
+    <div class="seo-card">
+      <h2>Gratis köpeavtal mellan privatpersoner</h2>
+      <p>När du säljer eller köper något privat kan ett skriftligt köpeavtal göra det tydligare vad ni har kommit överens om. Med KlarAffär fyller ni i parter, vara, pris, betalsätt och villkor och skapar sedan dokumentet som PDF.</p>
+      <button class="text-cta" data-start-doc="agreement">Skapa köpeavtal →</button>
+    </div>
+    <div class="seo-card">
+      <h2>Skapa kvitto vid privat försäljning</h2>
+      <p>Ett kvitto kan användas för att dokumentera att betalningen för en privat affär har mottagits. Fyll i uppgifterna om affären och skapa ett tydligt kvitto som PDF.</p>
+      <button class="text-cta" data-start-doc="receipt">Skapa kvitto →</button>
+    </div>
+    <div class="seo-card">
+      <h2>Anpassat efter vad du säljer</h2>
+      <p>KlarAffär visar relevanta uppgifter beroende på varutyp, till exempel registreringsnummer och mätarställning för bil eller modell och IMEI/serienummer för mobiltelefon.</p>
+    </div>
+  </section>
+
+  <footer>
+    KlarAffär skapar dokument lokalt i din webbläsare. Inga avtalsuppgifter sparas av tjänsten i denna version.
+    Tjänsten är ett dokumentverktyg och utgör inte individuell juridisk rådgivning.
+    <div class="footer-links">
+      <a href="integritet.html">Integritetspolicy</a>
+      <a href="villkor.html">Användarvillkor</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
